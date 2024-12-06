@@ -42,9 +42,9 @@ class MeshGenPreferences(bpy.types.AddonPreferences):
             box = layout.box()
             box.operator(MESHGEN_OT_UninstallDependencies.bl_idname, icon="IMPORT")
         
-            # Ollama backend options
-            box.prop(context.scene.meshgen_props, "use_ollama_backend", text="Use Ollama Backend")
+            if bpy.app.online_access:
+                box.prop(context.scene.meshgen_props, "use_ollama_backend", text="Use Ollama Backend")
             
-            if context.scene.meshgen_props.use_ollama_backend:
-                ollama_options_box = box.box()
-                ollama_options_box.prop(context.scene.meshgen_props, "ollama_host", text="Ollama Host")
+                if context.scene.meshgen_props.use_ollama_backend:
+                    ollama_options_box = box.box()
+                    ollama_options_box.prop(context.scene.meshgen_props, "ollama_host", text="Ollama Host")
